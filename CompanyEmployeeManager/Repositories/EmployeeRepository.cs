@@ -23,6 +23,12 @@ public class EmployeeRepository : IEmployeeRepository
     {
         return await _context.Employees.AsNoTracking().FirstOrDefaultAsync(p => p.EmployeeId == id);
     }
+
+    public async Task<Employee?> GetWithPosition(int id)
+    {
+        return await _context.Employees.AsNoTracking().Include(e => e.Position).Where(e => e.EmployeeId == id).FirstOrDefaultAsync();   
+    }
+
     public async Task<Employee> Create(Employee employee)
     {
         _context.Employees.Add(employee);

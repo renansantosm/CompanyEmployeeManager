@@ -1,8 +1,6 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Address;
 using CompanyEmployeeManager.DTOs.Models.Addresses;
-using CompanyEmployeeManager.DTOs.Models.Position;
 using CompanyEmployeeManager.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyEmployeeManager.Controllers;
@@ -39,6 +37,19 @@ public class AddressesController : ControllerBase
 
         return Ok(addressDto);
     }
+
+    [HttpGet("{id:int}/companies", Name = "GetAddressWithCompanies")]
+    public async Task<ActionResult<AddressWithCompaniesDTO>> GetAddressWithCompanies(int id)
+    {
+        var address = await _service.GetById(id);
+
+        if (address is null)
+            return NotFound();
+
+        var addressWithCompaniesDto = await _service.GetAddressWithCompanies(id);
+        return Ok(addressWithCompaniesDto);
+    }
+
 
     [HttpPost]
     public async Task<ActionResult<AddressDTO>> Create(CreateAddressDTO addressDto)

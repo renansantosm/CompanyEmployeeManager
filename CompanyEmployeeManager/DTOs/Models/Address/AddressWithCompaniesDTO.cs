@@ -1,9 +1,8 @@
-﻿using CompanyEmployeeManager.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using CompanyEmployeeManager.DTOs.Models.Company;
 
-namespace CompanyEmployeeManager.DTOs.Models.Addresses;
+namespace CompanyEmployeeManager.DTOs.Models.Address;
 
-public class AddressDTO
+public class AddressWithCompaniesDTO
 {
     public int AddressId { get; set; }
     public required string Street { get; set; }
@@ -12,4 +11,6 @@ public class AddressDTO
     public required string State { get; set; }
     public required string Country { get; set; }
     public required string PostalCode { get; set; }
+
+    public ICollection<CompanyDTO>? Company { get; set; }
 }

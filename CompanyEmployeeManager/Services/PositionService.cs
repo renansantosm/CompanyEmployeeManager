@@ -32,6 +32,11 @@ public class PositionService : IPositionService
         return _mapper.Map<PositionDTO>(position);
 
     }
+    public async Task<PositionWithEmployeesDTO> GetPositionWithEmployees(int id)
+    {
+        var position = await _repository.GetWithEmployees(id);
+        return _mapper.Map<PositionWithEmployeesDTO>(position);
+    }
 
     public async Task<PositionDTO> Create(CreatePositionDTO positionDTO)
     {

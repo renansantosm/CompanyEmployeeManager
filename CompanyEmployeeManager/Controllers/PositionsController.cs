@@ -38,6 +38,19 @@ public class PositionsController : ControllerBase
         return Ok(positionDto);
     }
 
+    [HttpGet("{id:int}/employees", Name = "GetPositionWithEmployees")]
+    public async Task<ActionResult<PositionWithEmployeesDTO>> GetPositionWithEmployees(int id)
+    {
+        var position = await _service.GetById(id);
+
+        if (position is null)
+            return NotFound();
+
+        var positionWithEmployeesDto = await _service.GetPositionWithEmployees(id);
+
+        return Ok(positionWithEmployeesDto);
+    }
+
     [HttpPost]
     public async Task<ActionResult<PositionDTO>> Create(CreatePositionDTO positionDTO)
     {

@@ -39,6 +39,19 @@ public class EmployeesController : ControllerBase
         return Ok(employeeDto);
     }
 
+    [HttpGet("{id:int}/position", Name = "GetEmployeeWithPosition")]
+    public async Task<ActionResult<EmployeeWithPositionDTO>> GetEmployeeWithPosition(int id)
+    {
+        var employeeDto = await _service.GetById(id);
+
+        if (employeeDto is null)
+            return NotFound();
+
+        var employeeWithPositionDto = await _service.GetEmployeeWithPosition(id);
+
+        return Ok(employeeWithPositionDto);
+    }
+
     [HttpPost]
     public async Task<ActionResult<EmployeeDTO>> Create(CreateEmployeeDTO employeeDTO)
     {
@@ -77,5 +90,4 @@ public class EmployeesController : ControllerBase
 
         return Ok(deletedEmployeeDto);
     }
-
 }

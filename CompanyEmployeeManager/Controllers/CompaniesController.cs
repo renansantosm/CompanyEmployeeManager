@@ -20,9 +20,9 @@ public class CompaniesController : ControllerBase
     {
         var companiesDto = await _service.GetAll(skip, take);
 
-        if (companiesDto is null) 
+        if (companiesDto is null)
             return NotFound();
-        
+
         return Ok(companiesDto);
     }
 
@@ -36,6 +36,33 @@ public class CompaniesController : ControllerBase
 
         return Ok(companyDto);
     }
+
+    [HttpGet("{id:int}/address", Name = "GetCompanyWithAddress")]
+    public async Task<ActionResult<CompanyWithAddressDTO>> GetWithAddress(int id)
+    {
+        var companyDto = await _service.GetById(id);
+
+        if (companyDto is null)
+            return NotFound();
+
+        var companyWithAddressDto = await _service.GetCompanyAddress(id);
+
+        return Ok(companyWithAddressDto);
+    }
+
+    [HttpGet("{id:int}/employees", Name = "GetCompanyWithEmployees")]
+    public async Task<ActionResult<CompanyWithEmployeesDTO>> GetWithEmployees(int id)
+    {
+        var companyDto = await _service.GetById(id);
+
+        if (companyDto is null)
+            return NotFound();
+
+        var companyWithEmployeesDetails = await _service.GetCompanyEmployees(id);
+
+        return Ok(companyWithEmployeesDetails);
+    }
+
 
     [HttpPost]
     public async Task<ActionResult<CompanyDTO>> Create(CreateCompanyDTO companyDto)

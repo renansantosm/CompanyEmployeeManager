@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace CompanyEmployeeManager.Models;
+namespace CompanyEmployeeManager.Errors;
 
 public class ErrorDetails
 {

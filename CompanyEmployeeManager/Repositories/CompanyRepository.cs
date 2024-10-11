@@ -24,7 +24,17 @@ public class CompanyRepository : ICompanyRepository
         return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(p => p.CompanyId == id);
     }
 
-    public async Task<Company> Create(Company company)
+    public async Task<Company?> GetWithAddress(int id)
+    {
+        return await _context.Companies.AsNoTracking().Include(c => c.Address).Where(c => c.CompanyId == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<Company?> GetWithEmployees(int id)
+    {
+        return await _context.Companies.AsNoTracking().Include(c => c.Employees).Where(c => c.CompanyId == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<Company?> Create(Company company)
     {
         _context.Companies.Add(company);
         await _context.SaveChangesAsync();

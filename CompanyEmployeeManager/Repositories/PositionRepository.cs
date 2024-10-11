@@ -25,6 +25,11 @@ public class PositionRepository : IPositionRepository
         return await _context.Positions.AsNoTracking().FirstOrDefaultAsync(p => p.PositionId == id);
     }
 
+    public async Task<Position?> GetWithEmployees(int id)
+    {
+        return await _context.Positions.AsNoTracking().Include(p => p.Employees).Where(p => p.PositionId == id).FirstOrDefaultAsync();
+    }
+
     public async Task<Position> Create(Position position)
     {
         _context.Positions.Add(position);

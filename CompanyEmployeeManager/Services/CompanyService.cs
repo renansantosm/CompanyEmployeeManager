@@ -19,7 +19,7 @@ public class CompanyService : ICompanyService
 
     public async Task<IEnumerable<CompanyDTO>> GetAll(int skip, int take)
     {
-        if(skip < 0) skip = 0;
+        if (skip < 0) skip = 0;
 
         if (take <= 0) take = 10;
 
@@ -31,6 +31,19 @@ public class CompanyService : ICompanyService
     {
         var company = await _repository.GetById(id);
         return _mapper.Map<CompanyDTO>(company);
+    }
+
+    public async Task<CompanyWithAddressDTO?> GetCompanyAddress(int id)
+    {
+        var company = await _repository.GetWithAddress(id);
+        return _mapper.Map<CompanyWithAddressDTO>(company);
+
+    }
+
+    public async Task<CompanyWithEmployeesDTO?> GetCompanyEmployees(int id)
+    {
+        var company = await _repository.GetWithEmployees(id);
+        return _mapper.Map<CompanyWithEmployeesDTO>(company);
     }
 
     public async Task<CompanyDTO> Create(CreateCompanyDTO companyDTO)

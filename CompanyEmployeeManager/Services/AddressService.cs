@@ -34,6 +34,12 @@ public class AddressService : IAddressService
         return _mapper.Map<AddressDTO>(address);
     }
 
+    public async Task<AddressWithCompaniesDTO> GetAddressWithCompanies(int id)
+    {
+        var address = await _repository.GetWithCompanies(id);
+        return _mapper.Map<AddressWithCompaniesDTO>(address);
+    }
+
     public async Task<AddressDTO> Create(CreateAddressDTO addressDTO)
     {
         var address = _mapper.Map<Address>(addressDTO);

@@ -1,4 +1,4 @@
-﻿using CompanyEmployeeManager.Models;
+﻿using CompanyEmployeeManager.Errors;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 

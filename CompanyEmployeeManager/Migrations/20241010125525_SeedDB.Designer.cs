@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyEmployeeManager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241003142528_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20241010125525_SeedDB")]
+    partial class SeedDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -32,6 +32,11 @@ public class EmployeeService : IEmployeeService
         var employee = await _repository.GetById(id);
         return _mapper.Map<EmployeeDTO>(employee);
     }
+    public async Task<EmployeeWithPositionDTO> GetEmployeeWithPosition(int id)
+    {
+        var employee = await _repository.GetWithPosition(id);
+        return _mapper.Map<EmployeeWithPositionDTO>(employee);
+    }
 
     public async Task<EmployeeDTO> Create(CreateEmployeeDTO employeeDTO)
     {

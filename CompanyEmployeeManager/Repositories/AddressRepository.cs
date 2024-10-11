@@ -24,6 +24,11 @@ public class AddressRepository : IAddressRepository
         return await _context.Addresses.AsNoTracking().FirstOrDefaultAsync(a => a.AddressId == id);
     }
 
+    public async Task<Address?> GetWithCompanies(int id)
+    {
+        return await _context.Addresses.AsNoTracking().Include(a => a.Company).Where(a => a.AddressId == id).FirstOrDefaultAsync();
+    }
+
     public async Task<Address> Create(Address address)
     {
         _context.Addresses.Add(address);
