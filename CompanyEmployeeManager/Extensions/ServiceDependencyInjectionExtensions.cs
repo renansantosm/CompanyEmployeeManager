@@ -11,6 +11,7 @@ public static class ServiceDependencyInjectionExtensions
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IPositionService, PositionService>();
+        services.AddScoped<ITokenService, TokenService>();
 
         return services;
     }
