@@ -17,7 +17,7 @@ public class AddressesController : ControllerBase
         _service = service;
     }
 
-    [Authorize(Policy = "AdminOnly")]
+    //[Authorize(Policy = "AdminOnly")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AddressDTO>>> GetAll(int skip = 0, int take = 10)
     {
@@ -29,7 +29,7 @@ public class AddressesController : ControllerBase
         return Ok(addressesDto);
     }
 
-    [Authorize(Policy = "UserOnly")]
+    //[Authorize(Policy = "UserOnly")]
     [HttpGet("{id:int}", Name = "GetAddress")]
     public async Task<ActionResult<AddressDTO>> Get(int id)
     {
@@ -41,7 +41,7 @@ public class AddressesController : ControllerBase
         return Ok(addressDto);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet("{id:int}/companies", Name = "GetAddressWithCompanies")]
     public async Task<ActionResult<AddressWithCompaniesDTO>> GetAddressWithCompanies(int id)
     {
