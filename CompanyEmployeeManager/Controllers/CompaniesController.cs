@@ -1,4 +1,6 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Company;
+using CompanyEmployeeManager.Extensions;
+using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +18,14 @@ public class CompaniesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CompanyDTO>>> GetAll(int skip = 0, int take = 10)
+    public async Task<ActionResult> GetAll([FromQuery] PaginationParams paginationParams)
     {
-        var companiesDto = await _service.GetAll(skip, take);
+        var companiesDto = await _service.GetAll(paginationParams.PageNumber, paginationParams.PageSize);
 
         if (companiesDto is null)
             return NotFound();
+
+        Response.AddPaginationHeader(new PaginationHeader(companiesDto.CurrentPage, companiesDto.PageSize, companiesDto.TotalCount, companiesDto.TotalPages));
 
         return Ok(companiesDto);
     }

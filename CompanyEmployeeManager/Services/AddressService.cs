@@ -2,6 +2,7 @@
 using CompanyEmployeeManager.DTOs.Models.Address;
 using CompanyEmployeeManager.DTOs.Models.Addresses;
 using CompanyEmployeeManager.Models;
+using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using CompanyEmployeeManager.Services.Interfaces;
 
@@ -18,14 +19,12 @@ public class AddressService : IAddressService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<AddressDTO>> GetAll(int skip, int take)
+    public async Task<PagedList<AddressDTO>> GetAll(int pageNumber, int pageSize)
     {
-        if (skip < 0) skip = 0;
-        if (take <= 0) take = 10;
+        var addresses = await _repository.GetAll(pageNumber, pageSize);
+        var addressesDto = _mapper.Map<IEnumerable<AddressDTO>>(addresses);
 
-        var addresses = await _repository.GetAll(skip, take);
-        return _mapper.Map<IEnumerable<AddressDTO>>(addresses);
-
+        return new PagedList<AddressDTO>(addressesDto, pageNumber, pageSize, addresses.TotalCount);
     }
 
     public async Task<AddressDTO> GetById(int id)

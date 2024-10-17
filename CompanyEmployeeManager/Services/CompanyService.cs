@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompanyEmployeeManager.DTOs.Models.Company;
 using CompanyEmployeeManager.Models;
+using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using CompanyEmployeeManager.Services.Interfaces;
 
@@ -17,14 +18,12 @@ public class CompanyService : ICompanyService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<CompanyDTO>> GetAll(int skip, int take)
+    public async Task<PagedList<CompanyDTO>> GetAll(int pageNumber, int pageSize)
     {
-        if (skip < 0) skip = 0;
+        var companies = await _repository.GetAll(pageNumber, pageSize);
+        var companiesDto =  _mapper.Map<IEnumerable<CompanyDTO>>(companies);
 
-        if (take <= 0) take = 10;
-
-        var companies = await _repository.GetAll(skip, take);
-        return _mapper.Map<IEnumerable<CompanyDTO>>(companies);
+        return new PagedList<CompanyDTO>(companiesDto, pageNumber, pageSize, companies.TotalCount);
     }
 
     public async Task<CompanyDTO?> GetById(int id)

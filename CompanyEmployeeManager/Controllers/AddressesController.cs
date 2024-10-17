@@ -1,5 +1,7 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Address;
 using CompanyEmployeeManager.DTOs.Models.Addresses;
+using CompanyEmployeeManager.Extensions;
+using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,13 +21,14 @@ public class AddressesController : ControllerBase
 
     //[Authorize(Policy = "AdminOnly")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AddressDTO>>> GetAll(int skip = 0, int take = 10)
+    public async Task<ActionResult> GetAll([FromQuery]PaginationParams paginationParams)
     {
-        var addressesDto = await _service.GetAll(skip, take);
+        var addressesDto = await _service.GetAll(paginationParams.PageNumber, paginationParams.PageSize);
 
         if (addressesDto is null)
             return NotFound();
 
+        Response.AddPaginationHeader(new PaginationHeader(addressesDto.CurrentPage, addressesDto.PageSize, addressesDto.TotalCount, addressesDto.TotalPages));
         return Ok(addressesDto);
     }
 

@@ -1,11 +1,12 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Address;
 using CompanyEmployeeManager.DTOs.Models.Addresses;
+using CompanyEmployeeManager.Pagination;
 
 namespace CompanyEmployeeManager.Services.Interfaces;
 
 public interface IAddressService
 {
-    Task<IEnumerable<AddressDTO>> GetAll(int skip, int take);
+    Task<PagedList<AddressDTO>> GetAll(int pageNumber, int pageSize);
     Task<AddressDTO> GetById(int id);
     Task<AddressWithCompaniesDTO> GetAddressWithCompanies(int id);
     Task<AddressDTO> Create(CreateAddressDTO addressDTO);

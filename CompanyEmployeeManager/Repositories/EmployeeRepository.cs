@@ -1,5 +1,7 @@
 ﻿using CompanyEmployeeManager.Context;
+using CompanyEmployeeManager.Helpers;
 using CompanyEmployeeManager.Models;
+using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +16,11 @@ public class EmployeeRepository : IEmployeeRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Employee>> GetAll(int skip, int take)
+    public async Task<PagedList<Employee>> GetAll(int pageNumber, int pageSize)
     {
-        return await _context.Employees.AsNoTracking().Skip(skip).Take(take).ToListAsync();
+        var query = _context.Employees.AsQueryable();
+
+        return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
     }
 
     public async Task<Employee?> GetById(int id)

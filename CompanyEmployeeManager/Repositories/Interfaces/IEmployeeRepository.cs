@@ -1,10 +1,11 @@
 ﻿using CompanyEmployeeManager.Models;
+using CompanyEmployeeManager.Pagination;
 
 namespace CompanyEmployeeManager.Repositories.Interfaces;
 
 public interface IEmployeeRepository
 {
-    Task<IEnumerable<Employee>> GetAll(int skip, int take);
+    Task<PagedList<Employee>> GetAll(int pageNumber, int pageSize);
     Task<Employee?> GetById(int id);
     Task<Employee?> GetWithPosition(int id);
     Task<Employee> Create(Employee employee);

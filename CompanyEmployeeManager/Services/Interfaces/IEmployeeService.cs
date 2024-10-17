@@ -1,10 +1,11 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Employee;
+using CompanyEmployeeManager.Pagination;
 
 namespace CompanyEmployeeManager.Services.Interfaces;
 
 public interface IEmployeeService
 {
-    Task<IEnumerable<EmployeeDTO>> GetAll(int skip, int take);
+    Task<PagedList<EmployeeDTO>> GetAll(int pageNumber, int pageSize);
     Task<EmployeeDTO> GetById(int id);
     Task<EmployeeWithPositionDTO> GetEmployeeWithPosition(int id);
     Task<EmployeeDTO> Create(CreateEmployeeDTO employeeDTO);
