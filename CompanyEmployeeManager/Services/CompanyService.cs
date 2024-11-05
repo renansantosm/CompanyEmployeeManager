@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using CompanyEmployeeManager.DTOs.Models.Company;
+using CompanyEmployeeManager.DTOs.Models.Pagination;
 using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using CompanyEmployeeManager.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace CompanyEmployeeManager.Services;
 
@@ -18,31 +20,42 @@ public class CompanyService : ICompanyService
         _repository = repository;
     }
 
-    public async Task<PagedList<CompanyDTO>> GetAll(int pageNumber, int pageSize)
+    public async Task<PagedResultListDTO<CompanyDTO>> GetAll(int pageNumber, int pageSize)
     {
         var companies = await _repository.GetAll(pageNumber, pageSize);
-        var companiesDto =  _mapper.Map<IEnumerable<CompanyDTO>>(companies);
 
-        return new PagedList<CompanyDTO>(companiesDto, pageNumber, pageSize, companies.TotalCount);
+        var companiesDto = _mapper.Map<IEnumerable<CompanyDTO>>(companies);
+
+        return new PagedResultListDTO<CompanyDTO>(companiesDto, new PaginationInfo(pageNumber, pageSize, await _repository.GetAllCount()));
     }
 
     public async Task<CompanyDTO?> GetById(int id)
     {
         var company = await _repository.GetById(id);
+
         return _mapper.Map<CompanyDTO>(company);
     }
 
-    public async Task<CompanyWithAddressDTO?> GetCompanyAddress(int id)
+    public async Task<CompanyWithAddressDTO?> GetCompanyByIdWithAddress(int id)
     {
-        var company = await _repository.GetWithAddress(id);
-        return _mapper.Map<CompanyWithAddressDTO>(company);
+        var company = await _repository.GetCompanyByIdWithAddress(id);
 
+        return _mapper.Map<CompanyWithAddressDTO>(company);
     }
 
-    public async Task<CompanyWithEmployeesDTO?> GetCompanyEmployees(int id)
+    public async Task<PagedResultDto<CompanyWithEmployeesPagedDTO>?> GetCompanyByIdWithEmployeesPaged(int id, int pageNumber, int pageSize)
     {
-        var company = await _repository.GetWithEmployees(id);
-        return _mapper.Map<CompanyWithEmployeesDTO>(company);
+        var companyWithEmployeesPaged = await _repository.GetCompanyByIdWithEmployeesPaged(id, pageNumber, pageSize);
+
+        if (companyWithEmployeesPaged is null)
+        {
+            return null;
+        }
+
+        var companyWithEmployeesPagedDto = _mapper.Map<CompanyWithEmployeesPagedDTO>(companyWithEmployeesPaged);
+
+        return new PagedResultDto<CompanyWithEmployeesPagedDTO>(companyWithEmployeesPagedDto, new PaginationInfo(pageNumber, pageSize, 
+                                                                                                                    await _repository.GetCompanyByIdWithEmployeesCount(id)));
     }
 
     public async Task<CompanyDTO> Create(CreateCompanyDTO companyDTO)
@@ -59,9 +72,10 @@ public class CompanyService : ICompanyService
         return _mapper.Map<CompanyDTO>(updatedCompany);
     }
 
-    public async Task<CompanyDTO> Delete(int id)
+    public async Task<CompanyDTO?> Delete(int id)
     {
         var deletedCompany = await _repository.Delete(id);
+
         return _mapper.Map<CompanyDTO>(deletedCompany);
     }
 }

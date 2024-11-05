@@ -15,18 +15,21 @@ public class MappingProfile : Profile
         // Company
         CreateMap<Company, CompanyDTO>().ReverseMap();
         CreateMap<Company, CreateCompanyDTO>().ReverseMap();
+        CreateMap<Company, CompanyWithoutAddressDTO>().ReverseMap();
 
         CreateMap<Company, CompanyWithAddressDTO>()
             .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
                 .ReverseMap();
 
-        CreateMap<Company, CompanyWithEmployeesDTO>()
+        CreateMap<Company, CompanyWithEmployeesPagedDTO>()
             .ForMember(dest => dest.Employees, opt => opt.MapFrom(src => src.Employees))
                 .ReverseMap();
 
         // Employee
         CreateMap<Employee, EmployeeDTO>().ReverseMap();
         CreateMap<Employee, CreateEmployeeDTO>().ReverseMap();
+        CreateMap<Employee, EmployeeWithoutCompanyDTO>().ReverseMap();
+        CreateMap<Employee, EmployeeWithoutPositionDTO>().ReverseMap();
 
         CreateMap<Employee, EmployeeWithPositionDTO>()
             .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position))
@@ -37,7 +40,7 @@ public class MappingProfile : Profile
         CreateMap<Address, CreateAddressDTO>().ReverseMap();
 
         CreateMap<Address, AddressWithCompaniesDTO>()
-            .ForMember(dest => dest.Company, opt => opt.MapFrom(src => src.Company))
+            .ForMember(dest => dest.Companies, opt => opt.MapFrom(src => src.Companies))
                 .ReverseMap();
 
         // Position

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using CompanyEmployeeManager.DTOs.Models.Addresses;
 using CompanyEmployeeManager.DTOs.Models.Employee;
+using CompanyEmployeeManager.DTOs.Models.Pagination;
 using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
@@ -19,20 +19,20 @@ public class EmployeeService : IEmployeeService
         _repository = repository;
     }
 
-    public async Task<PagedList<EmployeeDTO>> GetAll(int pageNumber, int pageSize)
+    public async Task<PagedResultListDTO<EmployeeDTO>> GetAll(int pageNumber, int pageSize)
     {
         var employees = await _repository.GetAll(pageNumber, pageSize);
-        var employeesDto = _mapper.Map<IEnumerable<EmployeeDTO>>(employees);
+        var employeesPagedDto = _mapper.Map<IEnumerable<EmployeeDTO>>(employees);
 
-        return new PagedList<EmployeeDTO>(employeesDto, pageNumber, pageSize, employees.TotalCount);
+        return new PagedResultListDTO<EmployeeDTO>(employeesPagedDto, new PaginationInfo(pageNumber, pageSize, await _repository.GetAllCount()));
     }
 
-    public async Task<EmployeeDTO> GetById(int id)
+    public async Task<EmployeeDTO?> GetById(int id)
     {
         var employee = await _repository.GetById(id);
         return _mapper.Map<EmployeeDTO>(employee);
     }
-    public async Task<EmployeeWithPositionDTO> GetEmployeeWithPosition(int id)
+    public async Task<EmployeeWithPositionDTO?> GetEmployeeWithPosition(int id)
     {
         var employee = await _repository.GetWithPosition(id);
         return _mapper.Map<EmployeeWithPositionDTO>(employee);
@@ -52,7 +52,7 @@ public class EmployeeService : IEmployeeService
         return _mapper.Map<EmployeeDTO>(updatedEmployee);
     }
 
-    public async Task<EmployeeDTO> Delete(int id)
+    public async Task<EmployeeDTO?> Delete(int id)
     {
         var deletedEmployee = await _repository.Delete(id);
         return _mapper.Map<EmployeeDTO>(deletedEmployee);

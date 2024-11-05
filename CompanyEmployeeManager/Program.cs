@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
@@ -32,7 +33,26 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "apicompany", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "API de Gestão de Empresas",
+        Version = "v1",
+        Description = "Esta API permite a gestão de dados de empresas, incluindo endereços, funcionários e cargos relacionados. Ela oferece endpoints para criar, atualizar, consultar e excluir registros de cada entidade, facilitando as operações empresariais.",
+        Contact = new OpenApiContact
+        {
+            Name = "Renan Moreira",
+            Email = "renan18241@hotmail.com",
+            Url = new Uri("https://github.com/renansantosm") 
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/licenses/MIT") 
+        }
+    });
+
+    var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {

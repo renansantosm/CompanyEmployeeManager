@@ -1,15 +1,17 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Company;
+using CompanyEmployeeManager.DTOs.Models.Employee;
+using CompanyEmployeeManager.DTOs.Models.Pagination;
 using CompanyEmployeeManager.Pagination;
 
 namespace CompanyEmployeeManager.Services.Interfaces;
 
 public interface ICompanyService
 {
-    Task<PagedList<CompanyDTO>> GetAll(int pageNumber, int pageSize);
+    Task<PagedResultListDTO<CompanyDTO>> GetAll(int pageNumber, int pageSize);
     Task<CompanyDTO?> GetById(int id);
-    Task<CompanyWithAddressDTO?> GetCompanyAddress(int id);
-    Task<CompanyWithEmployeesDTO?> GetCompanyEmployees(int id);
+    Task<CompanyWithAddressDTO?> GetCompanyByIdWithAddress(int id);
+    Task<PagedResultDto<CompanyWithEmployeesPagedDTO>?> GetCompanyByIdWithEmployeesPaged(int id,int pageNumber, int pageSize);
     Task<CompanyDTO> Create(CreateCompanyDTO companyDTO);
     Task<CompanyDTO> Update(CompanyDTO companyDTO);
-    Task<CompanyDTO> Delete(int id);
+    Task<CompanyDTO?> Delete(int id);
 }

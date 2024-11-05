@@ -1,7 +1,5 @@
 ﻿using CompanyEmployeeManager.Context;
-using CompanyEmployeeManager.Helpers;
 using CompanyEmployeeManager.Models;
-using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +14,14 @@ public class AddressRepository : IAddressRepository
         _context = context;
     }
 
-    public async Task<PagedList<Address>> GetAll(int pageNumber, int pageSize)
+    public async Task<IEnumerable<Address>> GetAll(int pageNumber, int pageSize)
     {
-        var query = _context.Addresses.AsQueryable();
-        return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
+        return await _context.Addresses.AsNoTracking().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+    }
+
+    public async Task<int> GetAllCount()
+    {
+        return await _context.Addresses.CountAsync();
     }
 
     public async Task<Address?> GetById(int id)
@@ -27,9 +29,23 @@ public class AddressRepository : IAddressRepository
         return await _context.Addresses.AsNoTracking().FirstOrDefaultAsync(a => a.AddressId == id);
     }
 
-    public async Task<Address?> GetWithCompanies(int id)
+    public async Task<Address?> GetAddressByIdWithCompaniesPaged(int id, int pageNumber, int pageSize)
     {
-        return await _context.Addresses.AsNoTracking().Include(a => a.Company).Where(a => a.AddressId == id).FirstOrDefaultAsync();
+        var address = await GetById(id);
+
+        if (address is null)
+        {
+           return null;
+        }
+
+        address.Companies = await _context.Companies.AsNoTracking().Where(c => c.AddressId == id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        return address;
+    }
+
+    public async Task<int> GetAddressByIdWithCompaniesCount(int id)
+    {
+        return await _context.Companies.Where(c => c.AddressId == id).CountAsync();
     }
 
     public async Task<Address> Create(Address address)
@@ -50,8 +66,10 @@ public class AddressRepository : IAddressRepository
     {
         var address = await _context.Addresses.FindAsync(id);
 
-        if(address is null) 
-            throw new ArgumentException(nameof(address));
+        if(address is null)
+        {
+            return null;
+        }
 
         _context.Addresses.Remove(address);
         await _context.SaveChangesAsync();

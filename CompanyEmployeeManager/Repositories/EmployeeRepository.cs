@@ -1,7 +1,5 @@
 ﻿using CompanyEmployeeManager.Context;
-using CompanyEmployeeManager.Helpers;
 using CompanyEmployeeManager.Models;
-using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +14,14 @@ public class EmployeeRepository : IEmployeeRepository
         _context = context;
     }
 
-    public async Task<PagedList<Employee>> GetAll(int pageNumber, int pageSize)
+    public async Task<IEnumerable<Employee>> GetAll(int pageNumber, int pageSize)
     {
-        var query = _context.Employees.AsQueryable();
+        return await _context.Employees.AsNoTracking().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+    }
 
-        return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
+    public async Task<int> GetAllCount()
+    {
+        return await _context.Employees.CountAsync();
     }
 
     public async Task<Employee?> GetById(int id)
@@ -48,12 +49,12 @@ public class EmployeeRepository : IEmployeeRepository
         return employee;
     }
 
-    public async Task<Employee> Delete(int id)
+    public async Task<Employee?> Delete(int id)
     {
         var employee = await _context.Employees.FindAsync(id);
 
         if(employee is null) 
-            throw new ArgumentException(nameof(employee));
+            return null;
 
         _context.Employees.Remove(employee);
         await _context.SaveChangesAsync();

@@ -5,10 +5,12 @@ namespace CompanyEmployeeManager.Repositories.Interfaces;
 
 public interface IPositionRepository
 {
-    Task<PagedList<Position>> GetAll(int pageNumber, int pageSize);
+    Task<IEnumerable<Position>> GetAll(int pageNumber, int pageSize);
+    Task<int> GetAllCount();
     Task<Position?> GetById(int id);
-    Task<Position?> GetWithEmployees(int id);
+    Task<Position?> GetPositionByIdWithEmployeesPaged(int id, int pageNumber, int pageSize);
+    Task<int> GetPositionByIdWithEmployeesCount(int id);
     Task<Position> Create(Position position);
     Task<Position> Update(Position position);
-    Task<Position> Delete(int id);
+    Task<Position?> Delete(int id);
 }

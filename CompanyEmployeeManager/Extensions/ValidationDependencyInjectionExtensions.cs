@@ -5,6 +5,7 @@ using CompanyEmployeeManager.DTOs.Models.Company;
 using CompanyEmployeeManager.DTOs.Models.Employee;
 using CompanyEmployeeManager.DTOs.Models.Position;
 using CompanyEmployeeManager.Models;
+using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Validators.Address;
 using CompanyEmployeeManager.Validators.Authentication;
 using CompanyEmployeeManager.Validators.Company;
@@ -40,7 +41,7 @@ public static class ValidationDependencyInjectionExtensions
         services.AddScoped<IValidator<LoginModelDTO>, LoginModelDTOValidator>();
 
         // Pagination
-        services.AddScoped<IValidator<PaginationParams>, PaginationParamsValidator>();
+        services.AddScoped<IValidator<PaginationParameters>, PaginationParametersValidator>();
 
         return services;
     }

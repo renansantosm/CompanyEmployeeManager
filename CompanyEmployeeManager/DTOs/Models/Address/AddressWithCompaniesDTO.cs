@@ -12,5 +12,5 @@ public class AddressWithCompaniesDTO
     public required string Country { get; set; }
     public required string PostalCode { get; set; }
 
-    public ICollection<CompanyDTO>? Company { get; set; }
+    public ICollection<CompanyWithoutAddressDTO>? Companies { get; set; }
 }

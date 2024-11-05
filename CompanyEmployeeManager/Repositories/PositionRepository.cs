@@ -1,10 +1,7 @@
 ﻿using CompanyEmployeeManager.Context;
-using CompanyEmployeeManager.Helpers;
 using CompanyEmployeeManager.Models;
-using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 namespace CompanyEmployeeManager.Repositories;
 
@@ -17,11 +14,14 @@ public class PositionRepository : IPositionRepository
         _context = context;
     }
 
-    public async Task<PagedList<Position>> GetAll(int pageNumber, int pageSize)
+    public async Task<IEnumerable<Position>> GetAll(int pageNumber, int pageSize)
     {
-        var query = _context.Positions.AsQueryable();
+        return await _context.Positions.AsNoTracking().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+    }
 
-        return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
+    public async Task<int> GetAllCount()
+    {
+        return await _context.Positions.CountAsync();
     }
 
     public async Task<Position?> GetById(int id)
@@ -29,9 +29,23 @@ public class PositionRepository : IPositionRepository
         return await _context.Positions.AsNoTracking().FirstOrDefaultAsync(p => p.PositionId == id);
     }
 
-    public async Task<Position?> GetWithEmployees(int id)
+    public async Task<Position?> GetPositionByIdWithEmployeesPaged(int id, int pageNumber, int pageSize)
     {
-        return await _context.Positions.AsNoTracking().Include(p => p.Employees).Where(p => p.PositionId == id).FirstOrDefaultAsync();
+        var position = await GetById(id);
+
+        if (position is null) 
+        { 
+            return null;    
+        }
+
+        position.Employees = await _context.Employees.AsNoTracking().Where(e => e.PositionId == id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        return position;
+    }
+
+    public async Task<int> GetPositionByIdWithEmployeesCount(int id)
+    {
+        return await _context.Employees.Where(e => e.PositionId == id).CountAsync();
     }
 
     public async Task<Position> Create(Position position)
@@ -49,12 +63,12 @@ public class PositionRepository : IPositionRepository
         return position;
     }
 
-    public async Task<Position> Delete(int id)
+    public async Task<Position?> Delete(int id)
     {
         var position = await _context.Positions.FindAsync(id);
 
         if (position is null) 
-            throw new ArgumentException(nameof(position));
+            return null;
 
         _context.Positions.Remove(position);
         await _context.SaveChangesAsync();

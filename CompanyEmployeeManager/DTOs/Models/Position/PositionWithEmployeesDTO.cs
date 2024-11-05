@@ -8,5 +8,5 @@ public class PositionWithEmployeesDTO
     public required string Name { get; set; }
     public string? Description { get; set; }
 
-    public IEnumerable<EmployeeDTO>? Employees { get; set; }
+    public IEnumerable<EmployeeWithoutPositionDTO>? Employees { get; set; }
 }

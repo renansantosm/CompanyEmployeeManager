@@ -1,5 +1,4 @@
 ﻿using CompanyEmployeeManager.Context;
-using CompanyEmployeeManager.Helpers;
 using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
@@ -16,28 +15,53 @@ public class CompanyRepository : ICompanyRepository
         _context = context;
     }
 
-    public async Task<PagedList<Company>> GetAll(int pageNumber, int pageSize)
+    public async Task<IEnumerable<Company>> GetAll(int pageNumber, int pageSize)
     {
-        var query = _context.Companies.AsQueryable();
-        return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
+        return await _context.Companies.AsNoTracking().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+    }
+
+    public async Task<int> GetAllCount()
+    {
+        return await _context.Companies.CountAsync();
     }
 
     public async Task<Company?> GetById(int id)
     {
-        return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(p => p.CompanyId == id);
+        return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(c => c.CompanyId == id);
     }
 
-    public async Task<Company?> GetWithAddress(int id)
+    public async Task<Company?> GetCompanyByIdWithAddress(int id)
     {
+        var company = await GetById(id);
+
+        if (company is null)
+        {
+            return null;
+        }
+
         return await _context.Companies.AsNoTracking().Include(c => c.Address).Where(c => c.CompanyId == id).FirstOrDefaultAsync();
     }
 
-    public async Task<Company?> GetWithEmployees(int id)
+    public async Task<Company?> GetCompanyByIdWithEmployeesPaged(int id, int pageNumber, int pageSize)
     {
-        return await _context.Companies.AsNoTracking().Include(c => c.Employees).Where(c => c.CompanyId == id).FirstOrDefaultAsync();
+        var company = await GetById(id);
+
+        if (company is null)
+        {
+            return null;
+        }
+
+        company.Employees = await _context.Employees.AsNoTracking().Where(c => c.CompanyId == id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        return company;
     }
 
-    public async Task<Company?> Create(Company company)
+    public async Task<int> GetCompanyByIdWithEmployeesCount(int id)
+    {
+        return await _context.Employees.Where(e => e.CompanyId == id).CountAsync();
+    }
+
+    public async Task<Company> Create(Company company)
     {
         _context.Companies.Add(company);
         await _context.SaveChangesAsync();
@@ -51,12 +75,12 @@ public class CompanyRepository : ICompanyRepository
         return company;
     }
 
-    public async Task<Company> Delete(int id)
+    public async Task<Company?> Delete(int id)
     {
         var company = await _context.Companies.FindAsync(id);
 
         if(company is null) 
-            throw new ArgumentException(nameof(company));
+            return null;
 
         _context.Companies.Remove(company);
         await _context.SaveChangesAsync();

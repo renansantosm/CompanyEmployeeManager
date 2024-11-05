@@ -29,8 +29,19 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
+    /// <summary>
+    /// Creates a new role in the system.
+    /// </summary>
+    /// <param name="roleName">The name of the role to be created.</param>
+    /// <returns>
+    /// An HTTP status 200 if the role is successfully created, 
+    /// or 400 if the role already exists or if an error occurs during creation.
+    /// </returns>    
     [HttpPost]
     [Route("CreateRole")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDTO), StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> CreateRole(string roleName)
     {
         var roleExist = await _roleManager.RoleExistsAsync(roleName);
@@ -54,8 +65,20 @@ public class AuthController : ControllerBase
             new ResponseDTO { Status = "Success", Message = $"Role already exists" });
     }
 
+    /// <summary>
+    /// Adds a user to a specified role.
+    /// </summary>
+    /// <param name="email">The email of the user to be added to the role.</param>
+    /// <param name="roleName">The name of the role to which the user will be added.</param>
+    /// <returns>
+    /// An HTTP status 200 if the user is successfully added to the role, 
+    /// 400 if the user is not found or if an error occurs during the operation.
+    /// </returns>    
     [HttpPost]
     [Route("AddUserToRole")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDTO), StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> AddUserToRole(string email, string roleName)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -77,9 +100,19 @@ public class AuthController : ControllerBase
         return BadRequest(new { error = "Unable to find user" });
     }
 
-
+    /// <summary>
+    /// Authenticates a user and generates an access token and a refresh token.
+    /// </summary>
+    /// <param name="model">A <c>LoginModelDTO</c> object containing the login credentials of the user.</param>
+    /// <returns>
+    /// An HTTP status 200 with the generated access token, refresh token, and expiration details 
+    /// if authentication is successful, or status 401 if authentication fails.
+    /// </returns>
     [HttpPost]
     [Route("login")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> Login([FromBody] LoginModelDTO model)
     {
         var user = await _userManager.FindByNameAsync(model.Username!);
@@ -119,11 +152,22 @@ public class AuthController : ControllerBase
                 Expiration = token.ValidTo
             });
         }
-        return Unauthorized();
+        return Unauthorized("Invalid username or password. Please check your credentials and try again.");
     }
 
+    /// <summary>
+    /// Registers a new user in the system.
+    /// </summary>
+    /// <param name="model">A <c>RegisterModelDTO</c> object containing the registration details of the user.</param>
+    /// <returns>
+    /// An HTTP status 200 with a success message if the user is created successfully, 
+    /// or status 500 with an error message if the user already exists or if user creation fails.
+    /// </returns>
     [HttpPost]
     [Route("Register")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDTO), StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Register([FromBody] RegisterModelDTO model)
     {
         var userExists = await _userManager.FindByNameAsync(model.Username!);
@@ -150,6 +194,16 @@ public class AuthController : ControllerBase
         return Ok(new ResponseDTO { Status = "Success", Message = "User created successfully!" });
     }
 
+    /// <summary>
+    /// Generates new access and refresh tokens based on a valid refresh token.
+    /// </summary>
+    /// <param name="tokenModel">
+    /// A <c>TokenModelDTO</c> object containing the client's access token and refresh token.
+    /// </param>
+    /// <returns>
+    /// A new pair of tokens (access and refresh) if the operation is successful, 
+    /// or an HTTP status 400 if the token request is invalid or expired.
+    /// </returns>
     [HttpPost]
     [Route("refresh-token")]
     public async Task<ActionResult> RefreshToken(TokenModelDTO tokenModel)
@@ -187,8 +241,19 @@ public class AuthController : ControllerBase
         });
     }
 
+    /// <summary>
+    /// Revokes a user's refresh token.
+    /// </summary>
+    /// <param name="username">The username whose refresh token will be revoked.</param>
+    /// <returns>
+    /// An HTTP status 204 (no content) if the revocation is successful, 
+    /// or 400 if the user is not found.
+    /// </returns>
     [HttpPost]
     [Route("revoke/{username}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Revoke(string username)
     {
         var user = await _userManager.FindByNameAsync(username);

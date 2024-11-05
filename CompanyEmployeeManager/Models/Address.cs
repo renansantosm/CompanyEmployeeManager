@@ -10,6 +10,6 @@ public class Address
     public required string Country { get; set; }
     public required string PostalCode { get; set; }
 
-    public ICollection<Company>? Company { get; set; }
+    public ICollection<Company>? Companies { get; set; }
 }
 

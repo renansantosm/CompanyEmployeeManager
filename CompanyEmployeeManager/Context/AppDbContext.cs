@@ -114,7 +114,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
                     .IsRequired();
 
         mb.Entity<Address>()
-            .HasMany(c => c.Company)
+            .HasMany(c => c.Companies)
                 .WithOne(a => a.Address)
                     .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
