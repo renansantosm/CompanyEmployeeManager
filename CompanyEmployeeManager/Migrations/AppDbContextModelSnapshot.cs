@@ -63,6 +63,38 @@ namespace CompanyEmployeeManager.Migrations
                     b.HasKey("AddressId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            City = "Metropolis",
+                            Country = "USA",
+                            Number = "123",
+                            PostalCode = "12345",
+                            State = "NY",
+                            Street = "Main St"
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            City = "Gotham",
+                            Country = "USA",
+                            Number = "456",
+                            PostalCode = "54321",
+                            State = "NJ",
+                            Street = "Elm St"
+                        },
+                        new
+                        {
+                            AddressId = 3,
+                            City = "Star City",
+                            Country = "USA",
+                            Number = "789",
+                            PostalCode = "67890",
+                            State = "CA",
+                            Street = "Oak St"
+                        });
                 });
 
             modelBuilder.Entity("CompanyEmployeeManager.Models.ApplicationUser", b =>
@@ -166,6 +198,32 @@ namespace CompanyEmployeeManager.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyId = 1,
+                            AddressId = 1,
+                            Email = "info@techcorp.com",
+                            Name = "TechCorp",
+                            Phone = "123-456-7890"
+                        },
+                        new
+                        {
+                            CompanyId = 2,
+                            AddressId = 2,
+                            Email = "info@wayne.com",
+                            Name = "Wayne Enterprises",
+                            Phone = "098-765-4321"
+                        },
+                        new
+                        {
+                            CompanyId = 3,
+                            AddressId = 3,
+                            Email = "info@queen.com",
+                            Name = "Queen Consolidated",
+                            Phone = "321-654-9870"
+                        });
                 });
 
             modelBuilder.Entity("CompanyEmployeeManager.Models.Employee", b =>
@@ -200,6 +258,88 @@ namespace CompanyEmployeeManager.Migrations
                         {
                             t.HasCheckConstraint("CHK_Age", "Age >= 18 AND Age <= 65");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            Age = 30,
+                            CompanyId = 1,
+                            Name = "John Doe",
+                            PositionId = 1
+                        },
+                        new
+                        {
+                            EmployeeId = 2,
+                            Age = 28,
+                            CompanyId = 1,
+                            Name = "Jane Smith",
+                            PositionId = 2
+                        },
+                        new
+                        {
+                            EmployeeId = 3,
+                            Age = 35,
+                            CompanyId = 2,
+                            Name = "Bruce Wayne",
+                            PositionId = 3
+                        },
+                        new
+                        {
+                            EmployeeId = 4,
+                            Age = 32,
+                            CompanyId = 2,
+                            Name = "Clark Kent",
+                            PositionId = 1
+                        },
+                        new
+                        {
+                            EmployeeId = 5,
+                            Age = 30,
+                            CompanyId = 2,
+                            Name = "Diana Prince",
+                            PositionId = 4
+                        },
+                        new
+                        {
+                            EmployeeId = 6,
+                            Age = 34,
+                            CompanyId = 3,
+                            Name = "Oliver Queen",
+                            PositionId = 5
+                        },
+                        new
+                        {
+                            EmployeeId = 7,
+                            Age = 29,
+                            CompanyId = 3,
+                            Name = "Felicity Smoak",
+                            PositionId = 1
+                        },
+                        new
+                        {
+                            EmployeeId = 8,
+                            Age = 27,
+                            CompanyId = 1,
+                            Name = "Barry Allen",
+                            PositionId = 3
+                        },
+                        new
+                        {
+                            EmployeeId = 9,
+                            Age = 31,
+                            CompanyId = 3,
+                            Name = "Hal Jordan",
+                            PositionId = 2
+                        },
+                        new
+                        {
+                            EmployeeId = 10,
+                            Age = 33,
+                            CompanyId = 2,
+                            Name = "Arthur Curry",
+                            PositionId = 6
+                        });
                 });
 
             modelBuilder.Entity("CompanyEmployeeManager.Models.Position", b =>
@@ -222,6 +362,44 @@ namespace CompanyEmployeeManager.Migrations
                     b.HasKey("PositionId");
 
                     b.ToTable("Positions");
+
+                    b.HasData(
+                        new
+                        {
+                            PositionId = 1,
+                            Description = "Responsible for developing software.",
+                            Name = "Software Engineer"
+                        },
+                        new
+                        {
+                            PositionId = 2,
+                            Description = "Oversees projects and teams.",
+                            Name = "Project Manager"
+                        },
+                        new
+                        {
+                            PositionId = 3,
+                            Description = "Analyzes and interprets complex data.",
+                            Name = "Data Analyst"
+                        },
+                        new
+                        {
+                            PositionId = 4,
+                            Description = "Handles human resources tasks.",
+                            Name = "HR Specialist"
+                        },
+                        new
+                        {
+                            PositionId = 5,
+                            Description = "Manages infrastructure and deployments.",
+                            Name = "DevOps Engineer"
+                        },
+                        new
+                        {
+                            PositionId = 6,
+                            Description = "Oversees marketing strategies.",
+                            Name = "Marketing Manager"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -359,7 +537,7 @@ namespace CompanyEmployeeManager.Migrations
             modelBuilder.Entity("CompanyEmployeeManager.Models.Company", b =>
                 {
                     b.HasOne("CompanyEmployeeManager.Models.Address", "Address")
-                        .WithMany("Company")
+                        .WithMany("Companies")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -439,7 +617,7 @@ namespace CompanyEmployeeManager.Migrations
 
             modelBuilder.Entity("CompanyEmployeeManager.Models.Address", b =>
                 {
-                    b.Navigation("Company");
+                    b.Navigation("Companies");
                 });
 
             modelBuilder.Entity("CompanyEmployeeManager.Models.Company", b =>
