@@ -35,13 +35,13 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "API de Gestão de Empresas",
+        Title = "Company Management API",
         Version = "v1",
-        Description = "Esta API permite a gestão de dados de empresas, incluindo endereços, funcionários e cargos relacionados. Ela oferece endpoints para criar, atualizar, consultar e excluir registros de cada entidade, facilitando as operações empresariais.",
+        Description = "This API enables the management of company data, including addresses, employees, and related positions. It provides endpoints to create, update, retrieve, and delete records for each entity, streamlining business operations.",
         Contact = new OpenApiContact
         {
             Name = "Renan Moreira",
-            Email = "renan18241@hotmail.com",
+            Email = "renan.h.s.moreira@gmail.com",
             Url = new Uri("https://github.com/renansantosm") 
         },
         License = new OpenApiLicense
