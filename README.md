@@ -1,4 +1,4 @@
-# Big Game Survey 
+# Company Management API  
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/renansantosm/CompanyEmployeeManager/blob/master/LICENSE) 
 
 # Sobre o projeto
@@ -45,14 +45,47 @@ git clone https://github.com/renansantosm/CompanyEmployeeManager
 # entrar na pasta do projeto 
 cd CompanyEmployeeManager
 ```
-### 2. Configure o Banco de Dados
-```bash
 
+### 2. Configure o Banco de Dados
+Abra o arquivo **appsettings.json** e altere as configurações de conexão com o banco de dados para refletir o ambiente local (por exemplo, usuário e senha). O arquivo deve se parecer com o seguinte:
+```C#
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost;Database=CompanyDB;Uid=your_user;Pwd=your_password;"
+    }
 ```
 
+### 3. Restaure as Dependências
+No terminal, execute o seguinte comando para restaurar os pacotes NuGet:
+``` bash
+dotnet restore
+```
+
+### 4. Aplique as Migrações
+Certifique-se de que você está na pasta principal do projeto onde o arquivo *.csproj está localizado. Caso não esteja, navegue até ela utilizando o comando:
+``` bash
+cd CompanyEmployeeManager
+```
+Em seguida, aplique as migrations para criar o banco de dados:
+``` bash
+dotnet ef database update
+```
+
+### 5. Compile e Execute a Aplicação
+``` bash
+dotnet run
+```
+
+### 6. Acesse a API
+Após iniciar a aplicação, os endereços para acesso serão exibidos no console, como no exemplo abaixo:
+``` bash
+Now listening on: https://localhost:5083  
+```
+Você pode usar esses endereços para acessar a API:
+``` bash
+    Swagger UI: https://localhost:5083/swagger/index.html
+```
 # Autor
 
-Wellington Mazoni de Andrade
+Renan Moreira 
 
-https://www.linkedin.com/in/wmazoni
-
+https://www.linkedin.com/in/renanhsmoreira
