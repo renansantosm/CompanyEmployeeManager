@@ -32,7 +32,7 @@ Este projeto foi desenvolvido como um exercício de aprendizado e demonstra boas
 # Como executar o projeto
 
 ## Pré-requisitos: 
-- .NET 8
+- .NET 8 SDK
 - MySQL Server
 - MySQL Workbench (opcional, para gerenciamento do banco de dados)
 - Editor de código como Visual Studio Code ou Visual Studio
