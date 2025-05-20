@@ -56,11 +56,13 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 
 ```bash
 # Clone o repositório
-git clone https://github.com/CompanyEmployeeManager
+git clone https://github.com/renansantosm/CompanyEmployeeManager
 cd CompanyEmployeeManager
 
 # Restaure as dependências
 dotnet restore
+
+cd CompanyEmployeeManager
 
 # Configure a string de conexão no appsettings.json
 # Execute as migrações do banco
