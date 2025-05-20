@@ -1,6 +1,7 @@
-# Company Management API 🏢
-
+<h1 align="center" style="font-weight: bold;">Company Management API 🏢 </h1>
+<p align="center">
 API backend para gerenciamento de empresas e dados relacionados, oferecendo funcionalidades para cadastro e administração de empresas, endereços, funcionários e cargos. Desenvolvida como meu primeiro projeto de portfólio, demonstra a aplicação de boas práticas iniciais para construção de APIs usando ASP.NET Core com uma arquitetura monolítica simples e eficaz.
+</p>
 
 ## ✨ Funcionalidades Principais
 
@@ -75,3 +76,18 @@ dotnet run
 # # [http://localhost:5083/swagger]
 # # [https://localhost:7234/swagger]
 ```
+## 🔑 Autenticação
+
+Para utilizar os endpoints protegidos, siga os passos:
+
+1. Crie um novo usuário através do endpoint `/api/Auth/register`
+2. Obtenha um token JWT através do endpoint `/api/Auth/login`
+3. Inclua o token no cabeçalho de autorização das requisições:
+
+```http
+Authorization: Bearer seu_token_jwt
+```
+
+## 📈 Jornada de Desenvolvimento
+
+Este projeto marcou o início da minha jornada como desenvolvedor de APIs RESTful, representando meu primeiro projeto de portfólio estruturado. As lições e experiências adquiridas aqui serviram como base para projetos mais complexos posteriormente, como a **Healthcare Management API**, onde apliquei princípios mais avançados de arquitetura limpa e DDD.
