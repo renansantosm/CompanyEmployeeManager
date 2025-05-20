@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyEmployeeManager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250520131724_Inicial")]
+    [Migration("20250520141306_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -71,32 +71,32 @@ namespace CompanyEmployeeManager.Migrations
                         new
                         {
                             AddressId = 1,
-                            City = "Metropolis",
-                            Country = "USA",
+                            City = "São Paulo",
+                            Country = "Brasil",
                             Number = "123",
-                            PostalCode = "12345",
-                            State = "NY",
-                            Street = "Main St"
+                            PostalCode = "01001-000",
+                            State = "SP",
+                            Street = "Rua das Flores"
                         },
                         new
                         {
                             AddressId = 2,
-                            City = "Gotham",
-                            Country = "USA",
+                            City = "Rio de Janeiro",
+                            Country = "Brasil",
                             Number = "456",
-                            PostalCode = "54321",
-                            State = "NJ",
-                            Street = "Elm St"
+                            PostalCode = "20040-002",
+                            State = "RJ",
+                            Street = "Avenida Brasil"
                         },
                         new
                         {
                             AddressId = 3,
-                            City = "Star City",
-                            Country = "USA",
+                            City = "Curitiba",
+                            Country = "Brasil",
                             Number = "789",
-                            PostalCode = "67890",
-                            State = "CA",
-                            Street = "Oak St"
+                            PostalCode = "80020-310",
+                            State = "PR",
+                            Street = "Rua XV de Novembro"
                         });
                 });
 
@@ -208,25 +208,25 @@ namespace CompanyEmployeeManager.Migrations
                         {
                             CompanyId = 1,
                             AddressId = 1,
-                            Email = "info@techcorp.com",
-                            Name = "TechCorp",
-                            Phone = "123-456-7890"
+                            Email = "contato@infotech.com.br",
+                            Name = "InfoTech Brasil",
+                            Phone = "(11) 91234-5678"
                         },
                         new
                         {
                             CompanyId = 2,
                             AddressId = 2,
-                            Email = "info@wayne.com",
-                            Name = "Wayne Enterprises",
-                            Phone = "098-765-4321"
+                            Email = "suporte@soluciona.com.br",
+                            Name = "Soluciona TI",
+                            Phone = "(21) 99876-5432"
                         },
                         new
                         {
                             CompanyId = 3,
                             AddressId = 3,
-                            Email = "info@queen.com",
-                            Name = "Queen Consolidated",
-                            Phone = "321-654-9870"
+                            Email = "atendimento@paranasy.com.br",
+                            Name = "Paraná Systems",
+                            Phone = "(41) 98765-4321"
                         });
                 });
 
@@ -267,81 +267,81 @@ namespace CompanyEmployeeManager.Migrations
                         new
                         {
                             EmployeeId = 1,
-                            Age = 30,
+                            Age = 29,
                             CompanyId = 1,
-                            Name = "John Doe",
+                            Name = "Ana Souza",
                             PositionId = 1
                         },
                         new
                         {
                             EmployeeId = 2,
-                            Age = 28,
+                            Age = 35,
                             CompanyId = 1,
-                            Name = "Jane Smith",
+                            Name = "Carlos Lima",
                             PositionId = 2
                         },
                         new
                         {
                             EmployeeId = 3,
-                            Age = 35,
+                            Age = 31,
                             CompanyId = 2,
-                            Name = "Bruce Wayne",
+                            Name = "Beatriz Ferreira",
                             PositionId = 3
                         },
                         new
                         {
                             EmployeeId = 4,
-                            Age = 32,
+                            Age = 27,
                             CompanyId = 2,
-                            Name = "Clark Kent",
+                            Name = "João Mendes",
                             PositionId = 1
                         },
                         new
                         {
                             EmployeeId = 5,
-                            Age = 30,
+                            Age = 32,
                             CompanyId = 2,
-                            Name = "Diana Prince",
+                            Name = "Mariana Oliveira",
                             PositionId = 4
                         },
                         new
                         {
                             EmployeeId = 6,
-                            Age = 34,
+                            Age = 33,
                             CompanyId = 3,
-                            Name = "Oliver Queen",
+                            Name = "Rafael Costa",
                             PositionId = 5
                         },
                         new
                         {
                             EmployeeId = 7,
-                            Age = 29,
+                            Age = 28,
                             CompanyId = 3,
-                            Name = "Felicity Smoak",
+                            Name = "Juliana Martins",
                             PositionId = 1
                         },
                         new
                         {
                             EmployeeId = 8,
-                            Age = 27,
+                            Age = 26,
                             CompanyId = 1,
-                            Name = "Barry Allen",
+                            Name = "Pedro Henrique",
                             PositionId = 3
                         },
                         new
                         {
                             EmployeeId = 9,
-                            Age = 31,
+                            Age = 30,
                             CompanyId = 3,
-                            Name = "Hal Jordan",
+                            Name = "Fernanda Alves",
                             PositionId = 2
                         },
                         new
                         {
                             EmployeeId = 10,
-                            Age = 33,
+                            Age = 34,
                             CompanyId = 2,
-                            Name = "Arthur Curry",
+                            Name = "Lucas Ribeiro",
                             PositionId = 6
                         });
                 });
@@ -371,38 +371,38 @@ namespace CompanyEmployeeManager.Migrations
                         new
                         {
                             PositionId = 1,
-                            Description = "Responsible for developing software.",
-                            Name = "Software Engineer"
+                            Description = "Responsável pelo desenvolvimento do servidor e banco de dados.",
+                            Name = "Desenvolvedor Back-End"
                         },
                         new
                         {
                             PositionId = 2,
-                            Description = "Oversees projects and teams.",
-                            Name = "Project Manager"
+                            Description = "Gerencia projetos e equipes de desenvolvimento.",
+                            Name = "Gerente de Projetos"
                         },
                         new
                         {
                             PositionId = 3,
-                            Description = "Analyzes and interprets complex data.",
-                            Name = "Data Analyst"
+                            Description = "Analisa e interpreta dados para decisões estratégicas.",
+                            Name = "Analista de Dados"
                         },
                         new
                         {
                             PositionId = 4,
-                            Description = "Handles human resources tasks.",
-                            Name = "HR Specialist"
+                            Description = "Cuida dos processos relacionados a pessoas.",
+                            Name = "Recursos Humanos"
                         },
                         new
                         {
                             PositionId = 5,
-                            Description = "Manages infrastructure and deployments.",
-                            Name = "DevOps Engineer"
+                            Description = "Automatiza e gerencia processos de infraestrutura.",
+                            Name = "Engenheiro DevOps"
                         },
                         new
                         {
                             PositionId = 6,
-                            Description = "Oversees marketing strategies.",
-                            Name = "Marketing Manager"
+                            Description = "Elabora e coordena ações de marketing.",
+                            Name = "Coordenador de Marketing"
                         });
                 });
 

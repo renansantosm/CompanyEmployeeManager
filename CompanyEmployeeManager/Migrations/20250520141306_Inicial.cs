@@ -248,9 +248,9 @@ namespace CompanyEmployeeManager.Migrations
                 columns: new[] { "AddressId", "City", "Country", "Number", "PostalCode", "State", "Street" },
                 values: new object[,]
                 {
-                    { 1, "Metropolis", "USA", "123", "12345", "NY", "Main St" },
-                    { 2, "Gotham", "USA", "456", "54321", "NJ", "Elm St" },
-                    { 3, "Star City", "USA", "789", "67890", "CA", "Oak St" }
+                    { 1, "São Paulo", "Brasil", "123", "01001-000", "SP", "Rua das Flores" },
+                    { 2, "Rio de Janeiro", "Brasil", "456", "20040-002", "RJ", "Avenida Brasil" },
+                    { 3, "Curitiba", "Brasil", "789", "80020-310", "PR", "Rua XV de Novembro" }
                 });
 
             migrationBuilder.InsertData(
@@ -258,12 +258,12 @@ namespace CompanyEmployeeManager.Migrations
                 columns: new[] { "PositionId", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Responsible for developing software.", "Software Engineer" },
-                    { 2, "Oversees projects and teams.", "Project Manager" },
-                    { 3, "Analyzes and interprets complex data.", "Data Analyst" },
-                    { 4, "Handles human resources tasks.", "HR Specialist" },
-                    { 5, "Manages infrastructure and deployments.", "DevOps Engineer" },
-                    { 6, "Oversees marketing strategies.", "Marketing Manager" }
+                    { 1, "Responsável pelo desenvolvimento do servidor e banco de dados.", "Desenvolvedor Back-End" },
+                    { 2, "Gerencia projetos e equipes de desenvolvimento.", "Gerente de Projetos" },
+                    { 3, "Analisa e interpreta dados para decisões estratégicas.", "Analista de Dados" },
+                    { 4, "Cuida dos processos relacionados a pessoas.", "Recursos Humanos" },
+                    { 5, "Automatiza e gerencia processos de infraestrutura.", "Engenheiro DevOps" },
+                    { 6, "Elabora e coordena ações de marketing.", "Coordenador de Marketing" }
                 });
 
             migrationBuilder.InsertData(
@@ -271,9 +271,9 @@ namespace CompanyEmployeeManager.Migrations
                 columns: new[] { "CompanyId", "AddressId", "Email", "Name", "Phone" },
                 values: new object[,]
                 {
-                    { 1, 1, "info@techcorp.com", "TechCorp", "123-456-7890" },
-                    { 2, 2, "info@wayne.com", "Wayne Enterprises", "098-765-4321" },
-                    { 3, 3, "info@queen.com", "Queen Consolidated", "321-654-9870" }
+                    { 1, 1, "contato@infotech.com.br", "InfoTech Brasil", "(11) 91234-5678" },
+                    { 2, 2, "suporte@soluciona.com.br", "Soluciona TI", "(21) 99876-5432" },
+                    { 3, 3, "atendimento@paranasy.com.br", "Paraná Systems", "(41) 98765-4321" }
                 });
 
             migrationBuilder.InsertData(
@@ -281,16 +281,16 @@ namespace CompanyEmployeeManager.Migrations
                 columns: new[] { "EmployeeId", "Age", "CompanyId", "Name", "PositionId" },
                 values: new object[,]
                 {
-                    { 1, 30, 1, "John Doe", 1 },
-                    { 2, 28, 1, "Jane Smith", 2 },
-                    { 3, 35, 2, "Bruce Wayne", 3 },
-                    { 4, 32, 2, "Clark Kent", 1 },
-                    { 5, 30, 2, "Diana Prince", 4 },
-                    { 6, 34, 3, "Oliver Queen", 5 },
-                    { 7, 29, 3, "Felicity Smoak", 1 },
-                    { 8, 27, 1, "Barry Allen", 3 },
-                    { 9, 31, 3, "Hal Jordan", 2 },
-                    { 10, 33, 2, "Arthur Curry", 6 }
+                    { 1, 29, 1, "Ana Souza", 1 },
+                    { 2, 35, 1, "Carlos Lima", 2 },
+                    { 3, 31, 2, "Beatriz Ferreira", 3 },
+                    { 4, 27, 2, "João Mendes", 1 },
+                    { 5, 32, 2, "Mariana Oliveira", 4 },
+                    { 6, 33, 3, "Rafael Costa", 5 },
+                    { 7, 28, 3, "Juliana Martins", 1 },
+                    { 8, 26, 1, "Pedro Henrique", 3 },
+                    { 9, 30, 3, "Fernanda Alves", 2 },
+                    { 10, 34, 2, "Lucas Ribeiro", 6 }
                 });
 
             migrationBuilder.CreateIndex(
