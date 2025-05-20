@@ -5,7 +5,6 @@ using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using CompanyEmployeeManager.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace CompanyEmployeeManager.Services;
 

@@ -1,7 +1,5 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Company;
-using CompanyEmployeeManager.DTOs.Models.Employee;
 using CompanyEmployeeManager.DTOs.Models.Pagination;
-using CompanyEmployeeManager.Pagination;
 
 namespace CompanyEmployeeManager.Services.Interfaces;
 

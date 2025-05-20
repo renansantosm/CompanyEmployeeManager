@@ -2,7 +2,6 @@
 using CompanyEmployeeManager.DTOs.Models.Position;
 using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyEmployeeManager.Controllers;

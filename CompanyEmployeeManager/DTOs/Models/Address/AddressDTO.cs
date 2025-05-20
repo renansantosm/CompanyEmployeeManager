@@ -1,7 +1,4 @@
-﻿using CompanyEmployeeManager.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace CompanyEmployeeManager.DTOs.Models.Addresses;
+﻿namespace CompanyEmployeeManager.DTOs.Models.Addresses;
 
 public class AddressDTO
 {

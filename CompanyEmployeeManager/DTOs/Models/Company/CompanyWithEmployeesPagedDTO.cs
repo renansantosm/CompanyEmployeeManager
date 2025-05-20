@@ -1,6 +1,4 @@
-﻿using CompanyEmployeeManager.DTOs.Models.Addresses;
-using CompanyEmployeeManager.DTOs.Models.Employee;
-using CompanyEmployeeManager.Pagination;
+﻿using CompanyEmployeeManager.DTOs.Models.Employee;
 
 namespace CompanyEmployeeManager.DTOs.Models.Company;
 

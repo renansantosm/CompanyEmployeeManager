@@ -4,7 +4,6 @@ using CompanyEmployeeManager.DTOs.Models.Authetication;
 using CompanyEmployeeManager.DTOs.Models.Company;
 using CompanyEmployeeManager.DTOs.Models.Employee;
 using CompanyEmployeeManager.DTOs.Models.Position;
-using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Validators.Address;
 using CompanyEmployeeManager.Validators.Authentication;

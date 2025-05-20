@@ -1,5 +1,4 @@
 ﻿using CompanyEmployeeManager.Models;
-using CompanyEmployeeManager.Pagination;
 
 namespace CompanyEmployeeManager.Repositories.Interfaces;
 

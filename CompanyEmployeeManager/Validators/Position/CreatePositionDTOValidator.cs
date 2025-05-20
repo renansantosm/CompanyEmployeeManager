@@ -1,5 +1,4 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Position;
-using CompanyEmployeeManager.Models;
 using FluentValidation;
 
 namespace CompanyEmployeeManager.Validators.Position;

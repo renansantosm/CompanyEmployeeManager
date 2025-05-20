@@ -1,7 +1,4 @@
-﻿using CompanyEmployeeManager.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace CompanyEmployeeManager.DTOs.Models.Company;
+﻿namespace CompanyEmployeeManager.DTOs.Models.Company;
 
 public class CompanyDTO
 {

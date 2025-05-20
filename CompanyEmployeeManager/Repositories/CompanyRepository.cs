@@ -1,6 +1,5 @@
 ﻿using CompanyEmployeeManager.Context;
 using CompanyEmployeeManager.Models;
-using CompanyEmployeeManager.Pagination;
 using CompanyEmployeeManager.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

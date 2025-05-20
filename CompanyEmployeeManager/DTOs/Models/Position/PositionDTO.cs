@@ -1,8 +1,4 @@
-﻿using CompanyEmployeeManager.Models;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-
-namespace CompanyEmployeeManager.DTOs.Models.Position;
+﻿namespace CompanyEmployeeManager.DTOs.Models.Position;
 
 public class PositionDTO
 {

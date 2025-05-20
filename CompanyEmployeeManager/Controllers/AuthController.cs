@@ -1,7 +1,6 @@
 ﻿using CompanyEmployeeManager.DTOs.Models.Authetication;
 using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;

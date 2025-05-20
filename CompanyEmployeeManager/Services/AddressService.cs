@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CompanyEmployeeManager.DTOs.Models.Address;
 using CompanyEmployeeManager.DTOs.Models.Addresses;
-using CompanyEmployeeManager.DTOs.Models.Company;
 using CompanyEmployeeManager.DTOs.Models.Pagination;
 using CompanyEmployeeManager.Models;
 using CompanyEmployeeManager.Pagination;
