@@ -36,6 +36,15 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 * **Service Layer**: Separação da lógica de negócios
 * **AutoMapper**: Mapeamento automático entre entidades e DTOs
 
+## 🔗 Endpoints Principais
+```
+/api/Auth - Registro, login e gerenciamento de usuários
+/api/Addresses - CRUD completo de endereços
+/api/Companies - CRUD completo de empresas
+/api/Employees - CRUD completo de funcionários
+/api/Positions – CRUD completo de cargos
+```
+
 ## 🚀 Como Executar
 
 1. 📋 **Pré-requisitos**
