@@ -56,7 +56,7 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 
 ```bash
 # Clone o repositório
-git clone https://github.com/CompanyEmployeeManager
+git clone https://github.com/renansantosm/CompanyEmployeeManager
 cd CompanyEmployeeManager
 
 # Restaure as dependências
