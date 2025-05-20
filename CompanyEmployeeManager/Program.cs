@@ -1,14 +1,7 @@
 using CompanyEmployeeManager.Context;
 using CompanyEmployeeManager.DTOs.Mapping;
-using CompanyEmployeeManager.DTOs.Models;
 using CompanyEmployeeManager.Extensions;
 using CompanyEmployeeManager.Models;
-using CompanyEmployeeManager.Repositories;
-using CompanyEmployeeManager.Repositories.Interfaces;
-using CompanyEmployeeManager.Services;
-using CompanyEmployeeManager.Services.Interfaces;
-using CompanyEmployeeManager.Validators;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
        .AddJsonOptions(options =>
-         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -135,12 +128,10 @@ builder.Services.AddServices();
 
 builder.Services.AddFluentValidationAutoValidation();
 
-
-var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<AppDbContext>(options =>
-                   options.UseMySql(mySqlConnection,
-                        ServerVersion.AutoDetect(mySqlConnection)));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
