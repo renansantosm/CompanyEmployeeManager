@@ -62,6 +62,8 @@ cd CompanyEmployeeManager
 # Restaure as dependências
 dotnet restore
 
+cd CompanyEmployeeManager
+
 # Configure a string de conexão no appsettings.json
 # Execute as migrações do banco
 dotnet ef database update 
