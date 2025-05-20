@@ -30,7 +30,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "Company Management API",
         Version = "v1",
-        Description = "This API enables the management of company data, including addresses, employees, and related positions. It provides endpoints to create, update, retrieve, and delete records for each entity, streamlining business operations.",
+        Description = "API for managing companies, employees, positions, and addresses ",
         Contact = new OpenApiContact
         {
             Name = "Renan Moreira",
