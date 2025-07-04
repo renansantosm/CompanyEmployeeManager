@@ -13,6 +13,8 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 * 📊 **Paginação de Dados**: Melhoria de desempenho e usabilidade em grandes conjuntos de informações
 * ✅ **Validações**: Verificação das entradas de dados com Fluent Validation
 * 📖 **Documentação**: Endpoints documentados com Swagger/OpenAPI
+* 🐳 **Docker**: Containerização completa da aplicação e banco de dados
+* 🔄 **Migrações Automáticas**: Banco de dados configurado automaticamente na inicialização
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -24,6 +26,7 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 * **Fluent Validation** - Biblioteca para validações
 * **AutoMapper** - Mapeamento entre entidades e DTOs
 * **Swagger/OpenAPI** - Documentação da API
+* **Docker** - Containerização da aplicação
 
 ## 🏗️ Arquitetura e Padrões de Design
 
@@ -48,12 +51,39 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 
 ## 🚀 Como Executar
 
-1. 📋 **Pré-requisitos**
-   - .NET 8.0 SDK ou superior
-   - SQL Server (local ou remoto)
-   - Git
+### 📋 Pré-requisitos
+- **Docker** instalado 
+- **Git** para clonar o repositório
 
-### ⚙️ Instalação e Execução
+### 🐳 Execução com Docker (Recomendado)
+A maneira mais rápida e fácil de executar a aplicação:
+
+```bash
+# Clone o repositório
+git clone https://github.com/renansantosm/CompanyEmployeeManager
+cd CompanyEmployeeManager
+
+# Execute com Docker Compose
+docker-compose up -d
+
+# Aguarde alguns segundos para os containers iniciarem
+# As migrações do banco são executadas automaticamente
+# Acesse a documentação Swagger
+# http://localhost:8081/swagger
+```
+
+**🐳 Informações dos Containers:**
+- **API**: Disponível na porta `8081` (http://localhost:8081)
+- **SQL Server**: Disponível na porta `1433` com as credenciais:
+  - **Usuário**: `sa`
+  - **Senha**: `Senha!2077`
+
+### ⚙️ Execução Local (Desenvolvimento)
+Para desenvolvimento e debugging:
+
+**Pré-requisitos para execução local:**
+- .NET 8.0 SDK ou superior
+- SQL Server (local ou remoto)
 
 ```bash
 # Clone o repositório
@@ -62,19 +92,15 @@ cd CompanyEmployeeManager
 
 # Restaure as dependências
 dotnet restore
-
 cd CompanyEmployeeManager
 
 # Configure a string de conexão no appsettings.json
-# Execute as migrações do banco
-dotnet ef database update 
-
-# Execute a aplicação
+# Execute a aplicação (migrações são aplicadas automaticamente)
 dotnet run
 
 # Acesse a documentação Swagger
-# # [http://localhost:5083/swagger]
-# # [https://localhost:7234/swagger]
+# http://localhost:5083/swagger
+# https://localhost:7234/swagger
 ```
 ## 🔑 Autenticação
 
