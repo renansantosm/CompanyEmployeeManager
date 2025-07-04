@@ -51,9 +51,9 @@ API backend para gerenciamento de empresas e dados relacionados, oferecendo func
 
 ## 🚀 Como Executar
 
-### 📋 Pré-requisitos
-- **Docker** instalado 
-- **Git** para clonar o repositório
+### 📋 Pré-requisitos para execução com Docker
+- Docker  
+- Git
 
 ### 🐳 Execução com Docker (Recomendado)
 A maneira mais rápida e fácil de executar a aplicação:
@@ -81,9 +81,10 @@ docker-compose up -d
 ### ⚙️ Execução Local (Desenvolvimento)
 Para desenvolvimento e debugging:
 
-**Pré-requisitos para execução local:**
+**📋 Pré-requisitos para execução local:**
 - .NET 8.0 SDK ou superior
 - SQL Server (local ou remoto)
+- Git
 
 ```bash
 # Clone o repositório
