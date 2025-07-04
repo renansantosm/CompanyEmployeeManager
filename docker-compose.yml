@@ -1,0 +1,6 @@
+services:
+  companyemployeemanager:
+    image: ${DOCKER_REGISTRY-}companyemployeemanager
+    build:
+      context: .
+      dockerfile: CompanyEmployeeManager/Dockerfile
