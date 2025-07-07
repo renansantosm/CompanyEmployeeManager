@@ -62,6 +62,7 @@ A maneira mais rápida e fácil de executar a aplicação:
 # Clone o repositório
 git clone https://github.com/renansantosm/CompanyEmployeeManager
 cd CompanyEmployeeManager
+cd CompanyEmployeeManager
 
 # Execute com Docker Compose
 docker-compose up -d
